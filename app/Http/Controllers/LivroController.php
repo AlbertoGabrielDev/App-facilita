@@ -7,11 +7,22 @@ use Illuminate\Http\Request;
 
 class LivroController extends Controller
 {
+    protected $fieldSearchable = [
+        'nome' => 'like',
+        'autor' => 'like',
+        'genero' => 'like',
+        'situacao' => 'like',
+        'numero_registro' => '=',
+    ];
+
     public function index()
-    {
-        $livros = Livro::paginate(10);
-        return view('biblioteca.livro.livro', compact('livros'));
-    }
+{
+    $livros = Livro::query();
+    $this->applyLikeConditions($livros, request()->get('searchLike'));
+    $livros = $livros->paginate(15);
+
+    return view('biblioteca.livro.livro', compact('livros'));
+}
 
     public function create()
     {
@@ -60,7 +71,7 @@ class LivroController extends Controller
 
         return response()->json([
             'success' => 'Livro atualizado com sucesso!',
-            'livro' => $livro // Retorna os dados do livro atualizado
+            'livro' => $livro 
         ]);
     }
 
@@ -73,18 +84,4 @@ class LivroController extends Controller
         ]);
     }
 
-    public function search(Request $request)
-{
-
-    $query = $request->input('query');
-    $livros = Livro::where('nome', 'like', "%{$query}%")
-                    ->orWhere('autor', 'like', "%{$query}%")
-                    ->orWhere('numero_registro', 'like', "%{$query}%")
-                    ->orWhere('genero', 'like', "%{$query}%")
-                    ->paginate(10);
-
-              
-    
-    return view('biblioteca.livro.livro', compact('livros'));
-}
 }

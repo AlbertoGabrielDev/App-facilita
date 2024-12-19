@@ -29,16 +29,15 @@
           <td>{{ $livro->genero }}</td>
           <td>{{ $livro->situacao }}</td>
           <td>
-          <button class="btn btn-primary editBook" data-id="{{ $livro->id }}">Editar</button>
-          <button class="btn btn-danger deleteBook" data-id="{{ $livro->id }}">Excluir</button>
+            <button class="btn btn-primary editBook" data-id="{{ $livro->id }}">Editar</button>
+            <button class="btn btn-danger deleteBook" data-id="{{ $livro->id }}">Excluir</button>
           </td>
         </tr>
         @endforeach
       </tbody>
     </table>
-    <div class="d-flex justify-content-center">
-    {{ $livros->links() }}
-</div>
+    <a href="#" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400">{{$livros->currentPage()}}</a>
+
   </div>
 </div>
 
