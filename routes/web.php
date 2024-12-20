@@ -36,7 +36,4 @@ Route::prefix('/biblioteca')->group(function() {
     Route::get('/usuario/search', [UserController::class, 'search'])->name('usuario.search');
     Route::post('/usuario/status/{userId}', [UserController::class, 'status'])->name('usuario.status')->middleware('permission');
 });
-
-Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
 require __DIR__.'/auth.php';

@@ -30,7 +30,7 @@
             <a class="nav-link" href="{{route('livro.index')}}" data-section="books">Livros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" data-section="loans">Empréstimos</a>
+            <a class="nav-link" href="{{route('emprestimo.index')}}" data-section="loans">Empréstimos</a>
           </li>
         </ul>
       </div>
