@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('livro_emprestimos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('livro_id');
+            $table->unsignedBigInteger('id_livros');
             $table->date('data_emprestimo');
             $table->date('data_devolucao');
-            $table->enum('status', ['Em Andamento', 'Atrasado', 'Devolvido'])->default('Em Andamento');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('livro_id')->references('id')->on('livros');
+            $table->enum('status_emprestimo', ['Em Andamento', 'Atrasado', 'Devolvido'])->default('Em Andamento');
+         
+            $table->foreign('id_livros')->references('id')->on('livros');
             $table->timestamps();
 
             $table->unsignedBigInteger('id_users');

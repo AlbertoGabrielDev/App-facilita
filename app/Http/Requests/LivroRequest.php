@@ -19,7 +19,7 @@ class LivroRequest extends FormRequest
                 'unique:livros,numero_registro,' . $this->route('livro'),
             ],
             'genero' => 'required|max:255',
-            'situacao' => 'required|in:disponivel,emprestado'
+           
         ];
     }
     public function messages(): array
@@ -34,8 +34,7 @@ class LivroRequest extends FormRequest
             'numero_registro.unique' => 'Já existe um livro com esse número de registro.',
             'genero.required' => 'O gênero do livro é obrigatório.',
             'genero.max' => 'O gênero do livro não pode ter mais que 255 caracteres.',
-            'situacao.required' => 'A situação do livro é obrigatória.',
-            'situacao.in' => 'A situação do livro deve ser "disponível" ou "indisponível".',
+          
         ];
     }
 
@@ -46,7 +45,7 @@ class LivroRequest extends FormRequest
             'autor' => 'autor do livro',
             'numero_registro' => 'número de registro',
             'genero' => 'gênero',
-            'situacao' => 'situação do livro',
+           
         ];
     }
 }

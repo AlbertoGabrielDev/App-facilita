@@ -14,6 +14,11 @@ class UserController extends Controller
         'numero_cadastro' => '=',
         'status' => '=',
     ];
+
+    public function model()
+    {
+        return User::class;
+    }
     public function index()
     {
         $user = User::query();

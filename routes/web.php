@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\EmprestimoController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,9 +31,12 @@ Route::prefix('/biblioteca')->group(function() {
   
     Route::resource('usuario', UserController::class)->except(['show'])->middleware('permission');
     Route::resource('livro', LivroController::class)->except(['show']);
+    Route::resource('emprestimo', EmprestimoController::class)->except(['show']);
     Route::get('/livro/search', [LivroController::class, 'search'])->name('livro.search');
     Route::get('/usuario/search', [UserController::class, 'search'])->name('usuario.search');
     Route::post('/usuario/status/{userId}', [UserController::class, 'status'])->name('usuario.status')->middleware('permission');
-    // Route::resource('book_loans', BookLoanController::class);
 });
+
+Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('login', [AuthenticatedSessionController::class, 'store']);
 require __DIR__.'/auth.php';

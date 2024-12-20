@@ -11,15 +11,19 @@ class LivroController extends Controller
         'nome' => 'like',
         'autor' => 'like',
         'genero' => 'like',
-        'situacao' => 'like',
         'numero_registro' => '=',
+        'situacao' => 'like'
     ];
+    public function model()
+    {
+        return Livro::class;
+    }
 
     public function index()
 {
         $livro = Livro::query();
         $this->applyLikeConditions($livro, request()->get('searchLike'));
-        $livros = $livro->paginate(15);
+        $livros = $livro->paginate(5);
 
         return view('biblioteca.livro.livro', compact('livros'));
 }

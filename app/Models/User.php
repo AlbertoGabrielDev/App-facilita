@@ -24,6 +24,10 @@ class User extends Authenticatable
         'numero_cadastro',
         'status'
     ];
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
 
     public function hasPermissionTo($permission)
     {
@@ -49,4 +53,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    
 }

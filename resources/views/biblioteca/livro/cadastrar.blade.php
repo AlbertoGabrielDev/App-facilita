@@ -17,7 +17,7 @@
     <form id="bookForm" method="POST" action="{{ isset($livro) ? route('livro.update', $livro->id) : route('livro.store') }}">
         @csrf
         @if (isset($livro)) 
-            @method('PUT') <!-- Método PUT para edição -->
+            @method('PUT')
         @endif
 
         <div class="mb-3">
@@ -42,14 +42,6 @@
                 <option value="Fantasia" {{ old('genero', $livro->genero ?? '') == 'Fantasia' ? 'selected' : '' }}>Fantasia</option>
                 <option value="Aventura" {{ old('genero', $livro->genero ?? '') == 'Aventura' ? 'selected' : '' }}>Aventura</option>
                 <option value="Outros" {{ old('genero', $livro->genero ?? '') == 'Outros' ? 'selected' : '' }}>Outros</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label" for="bookStatus">Situação</label>
-            <select class="form-control" id="bookStatus" name="situacao" required>
-                <option value="disponivel" {{ old('situacao', $livro->situacao ?? '') == 'Disponivel' ? 'selected' : '' }}>Disponível</option>
-                <option value="emprestado" {{ old('situacao', $livro->situacao ?? '') == 'Emprestado' ? 'selected' : '' }}>Emprestado</option>
             </select>
         </div>
 

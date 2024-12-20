@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('numero_cadastro')->after('id')->unique();
+            $table->integer('numero_cadastro')->nullable()->after('id')->unique();
         });
     }
 

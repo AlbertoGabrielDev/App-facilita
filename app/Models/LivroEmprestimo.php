@@ -6,15 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class LivroEmprestimo extends Model{
 
-    protected $fillable = ['user_id', 'livro_id', 'data_emprestimo', 'data_devolucao', 'status'];
+
+    protected $fillable = ['id_users', 'id_livros', 'data_emprestimo', 'data_devolucao', 'status_emprestimo'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_users');
     }
 
-    public function book()
+    public function livro()
     {
-        return $this->belongsTo(Livro::class);
+        return $this->belongsTo(Livro::class, 'id_livros');
     }
+
+    public function getFieldsSearchable()
+    {
+        return $this->fieldSearchable;
+    }
+
+  
 }
