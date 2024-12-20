@@ -29,7 +29,7 @@ Este projeto utiliza o **Laravel 10** com as seguintes bibliotecas e dependênci
 Clone este repositório para o seu ambiente local:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-projeto.git
+git clone git@github.com:AlbertoGabrielDev/App-facilita.git
 cd seu-projeto
 
 composer install
