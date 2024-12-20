@@ -1,4 +1,5 @@
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +20,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          @can('permissao')            
           <li class="nav-item">
-            <a class="nav-link" href="#" data-section="users">Usuários</a>
+            <a class="nav-link" href="{{route('usuario.index')}}" data-section="users">Usuários</a>
           </li>
+          @endcan
+
           <li class="nav-item">
             <a class="nav-link" href="{{route('livro.index')}}" data-section="books">Livros</a>
           </li>
@@ -30,6 +34,12 @@
           </li>
         </ul>
       </div>
+      <form action="{{ route('logout') }}" method="POST" class="d-inline">
+        @csrf
+        <button type="submit" class="btn btn-danger">
+          <i class="fas fa-sign-out-alt"></i> Sair
+        </button>
+      </form>
     </div>
   </nav>
 

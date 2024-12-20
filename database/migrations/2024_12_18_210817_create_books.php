@@ -19,6 +19,9 @@ return new class extends Migration
             $table->enum('situacao', ['Disponível', 'Emprestado'])->default('Disponível');
             $table->enum('genero', ['Ficção', 'Romance', 'Fantasia', 'Aventura'])->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('id_users');
+            $table->foreign('id_users')->references('id')->on('users');
         });
     }
 

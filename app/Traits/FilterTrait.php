@@ -8,8 +8,10 @@ trait FilterTrait
     {
         if ($searchLike) {
             foreach ($this->fieldSearchable as $field => $operator) {
+
                 if ($operator === 'like') {
                     $query->orWhere($field, 'LIKE', '%' . $searchLike . '%');
+                 
                 }
 
                 if ($operator === '=') {

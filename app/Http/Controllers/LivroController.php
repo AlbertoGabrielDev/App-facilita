@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LivroForm;
 use App\Http\Requests\LivroRequest;
 use App\Models\Livro;
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class LivroController extends Controller
 {
     protected $fieldSearchable = [
@@ -19,11 +17,11 @@ class LivroController extends Controller
 
     public function index()
 {
-    $livros = Livro::query();
-    $this->applyLikeConditions($livros, request()->get('searchLike'));
-    $livros = $livros->paginate(15);
+        $livro = Livro::query();
+        $this->applyLikeConditions($livro, request()->get('searchLike'));
+        $livros = $livro->paginate(15);
 
-    return view('biblioteca.livro.livro', compact('livros'));
+        return view('biblioteca.livro.livro', compact('livros'));
 }
 
     public function create()
@@ -35,7 +33,10 @@ class LivroController extends Controller
     {
 
         $validatedData = $request->validated();
-        Livro::create($validatedData);
+        $validatedData['id_users'] = Auth::id();
+        Livro::create(
+            $validatedData
+        );
         return redirect()->route('livro.index')->with('success', 'Livro criado com sucesso');
     }
 

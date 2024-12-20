@@ -14,7 +14,6 @@
         </div>
     @endif
     
-    <!-- Formulário de cadastro e edição -->
     <form id="bookForm" method="POST" action="{{ isset($livro) ? route('livro.update', $livro->id) : route('livro.store') }}">
         @csrf
         @if (isset($livro)) 
@@ -49,8 +48,8 @@
         <div class="mb-3">
             <label class="form-label" for="bookStatus">Situação</label>
             <select class="form-control" id="bookStatus" name="situacao" required>
-                <option value="disponivel" {{ old('situacao', $livro->situacao ?? '') == 'disponivel' ? 'selected' : '' }}>Disponível</option>
-                <option value="indisponivel" {{ old('situacao', $livro->situacao ?? '') == 'indisponivel' ? 'selected' : '' }}>Indisponível</option>
+                <option value="disponivel" {{ old('situacao', $livro->situacao ?? '') == 'Disponivel' ? 'selected' : '' }}>Disponível</option>
+                <option value="emprestado" {{ old('situacao', $livro->situacao ?? '') == 'Emprestado' ? 'selected' : '' }}>Emprestado</option>
             </select>
         </div>
 

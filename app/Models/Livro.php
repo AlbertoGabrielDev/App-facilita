@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Livro extends Model
 {
-    protected $fillable = ['nome', 'autor', 'numero_registro', 'situacao', 'genero'];
+    protected $fillable = ['nome', 'autor', 'numero_registro', 'situacao', 'genero','id_users'];
 
     public function bookLoans()
     {

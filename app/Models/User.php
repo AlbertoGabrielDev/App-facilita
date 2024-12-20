@@ -21,9 +21,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'numero_cadastro'
+        'numero_cadastro',
+        'status'
     ];
 
+    public function hasPermissionTo($permission)
+    {
+        $permissions = $this->permissions ?? [];
+        return in_array($permission, $permissions);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
