@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LivroForm;
+use App\Http\Requests\LivroRequest;
 use App\Models\Livro;
 use Illuminate\Http\Request;
 
@@ -29,59 +31,35 @@ class LivroController extends Controller
         return view('biblioteca.livro.cadastrar');
     }
 
-    public function store(Request $request)
+    public function store(LivroRequest $request)
     {
-        $validatedData = $request->validate([
-            'nome' => 'required|max:255',
-            'autor' => 'required|max:255',
-            'numero_registro' => 'required|unique:livros',
-            'genero' => 'required'
-        ]);
 
-        $livro = Livro::create($validatedData);
-
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => 'Livro criado com sucesso!',
-                'livro' => $livro
-            ]);
-        }
-
-        return view('livro.index')->with('success', 'Livro criado');
+        $validatedData = $request->validated();
+        Livro::create($validatedData);
+        return redirect()->route('livro.index')->with('success', 'Livro criado com sucesso');
     }
 
     public function edit($id)
     {
-        $livro = Livro::findOrFail($id);
-        return response()->json($livro);
+        $livro = Livro::findOrFail($id); 
+        return view('biblioteca.livro.cadastrar', compact('livro')); 
     }
 
-    public function update(Request $request, $id)
-    {
-        $livro = Livro::findOrFail($id);
+    public function update(LivroRequest $request, $id)
+{
+    $livro = Livro::findOrFail($id); 
+    $validatedData = $request->validated();
+    $livro->update($validatedData);  
 
-        $validatedData = $request->validate([
-            'nome' => 'required|max:255',
-            'autor' => 'required|max:255',
-            'numero_registro' => 'required|unique:livros,numero_registro,' . $livro->id,
-            'genero' => 'required'
-        ]);
-
-        $livro->update($validatedData);
-
-        return response()->json([
-            'success' => 'Livro atualizado com sucesso!',
-            'livro' => $livro 
-        ]);
-    }
+    return redirect()->route('livro.index')->with('success', 'Livro atualizado com sucesso');
+}
 
     public function destroy($id)
     {
         $livro = Livro::findOrFail($id);
         $livro->delete();
-        return response()->json([
-            'success' => 'Livro excluído com sucesso!'
-        ]);
+        return redirect()->route('livro.index')->with('success', 'Livro excluído com sucesso!');
+
     }
 
 }
